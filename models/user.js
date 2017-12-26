@@ -15,22 +15,54 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
+    required: true,
+    select: false
+  },
+  name: { 
+    type: String,
     required: true
   },
-  profile: {
-    firstName: { type: String },
-    lastName: { type: String },
-    contactNo: {
-      type: String,
-      required: true
-    }
-  },
-  role: {
-    type: String
+  contactNo: {
+    type: String,
+    required: true
   },
   createdBy: {
-    type: Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
+    select: false
+  },
+  createdAt: {
+    type: Date,
+    select: false
   },
 });
+//= ===============================
+// User ORM Methods
+//= ===============================
+
+// Pre-save of user to database, hash password if password is modified or new
+UserSchema.pre('save', function (next) {
+  const user = this,
+    SALT_FACTOR = 5;
+
+  if (!user.isModified('password')) return next();
+
+  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, null, (err1, hash) => {
+      if (err1) return next(err1);
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+// Method to compare password for login
+UserSchema.methods.comparePassword = function (candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    if (err) { return cb(err); }
+    cb(null, isMatch);
+  });
+};
 
 module.exports = mongoose.model('User', UserSchema);

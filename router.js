@@ -37,6 +37,18 @@ module.exports = function routes(app) {
   userRoutes.get('/event/:eventId', UserController.getUserByEventId);
   userRoutes.get('/attendance/:attendanceId', UserController.getUserByAttendanceId);
 
+  
+  apiRoutes.use('/events', eventRoutes);
+  eventRoutes.post('/', EventController.createEvent);
+  eventRoutes.get('/', EventController.getEvents);
+  eventRoutes.get('/:eventId', EventController.getEventById);
+
+  apiRoutes.use('/attendance', attendanceRoutes);
+  attendanceRoutes.post('/event/:eventId', AttendanceController.createAttendance);
+  attendanceRoutes.get('/event/:eventId', AttendanceController.getAttendanceByEventId);
+  attendanceRoutes.get('/user/:userId', AttendanceController.getAttendanceByUserId);
+  attendanceRoutes.put('/event/:eventId/user/:userId', AttendanceController.updateAttendanceByUserAndEventId)
+
   // Set url for API group routes
   app.use('/api', apiRoutes);
 };

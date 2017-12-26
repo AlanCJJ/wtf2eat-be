@@ -8,7 +8,7 @@ const express = require('express'),
   config = require('./config/main');
 
 // Database Setup
-mongoose.connect(config.database, {
+mongoose.connect(config.database + '/wtf2eat', {
   useMongoClient: true
 });
 

@@ -79,12 +79,10 @@ exports.getUserByAttendanceId = function list(req, res, next) {
   })
 };
 
-exports.user = function add(req, res, next) {
+exports.user = function user(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
-  const role = req.body.role;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
+  const name = req.body.name;
   const contactNo = req.body.contactNo;
   const createdBy = req.body.createdBy;
   const createdAt = new Date();
@@ -96,12 +94,8 @@ exports.user = function add(req, res, next) {
       const user = new User({
         email,
         password,
-        role,
-        profile: {
-          firstName,
-          lastName,
-          contactNo
-        },
+        name,
+        contactNo,
         createdBy,
         createdAt
       });

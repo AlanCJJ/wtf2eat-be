@@ -18,21 +18,6 @@ exports.setUserInfo = function setUserInfo(request) {
   return getUserInfo;
 };
 
-exports.getRole = function getRole(checkRole) {
-  let role;
-
-  switch (checkRole) {
-    case constants.roles.SUPERADMIN: role = 6; break;
-    case constants.roles.ADMIN: role = 5; break;
-    case constants.roles.SUPEROPERATOR: role = 4; break;
-    case constants.roles.OPERATOR: role = 3; break;
-    case constants.roles.PLACEVIEW: role = 2; break;
-    case constants.roles.OWNER: role = 1; break;
-    default: role = 1;
-  }
-
-  return role;
-};
 
 exports.dateToNiceString = function dateToNiceString(inputDate) {
   if (inputDate.constructor.name !== 'Date') {

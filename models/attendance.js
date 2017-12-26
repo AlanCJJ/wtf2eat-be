@@ -12,11 +12,11 @@ const AttendanceSchema = new Schema({
   },
   event: {
     type: Schema.Types.ObjectId,
-    ref: 'event'
+    ref: 'Event'
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'User'
   },
   createdBy: {
     type: Schema.Types.ObjectId,
