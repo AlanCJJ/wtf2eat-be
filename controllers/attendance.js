@@ -40,7 +40,7 @@ exports.getAttendanceByEventId = function list(req, res, next){
   const event = req.params.eventId;
   Attendance.find({event, deletedAt: null})
   .populate([{path:'user', select:'name'}])
-  .select('user decision updatedAt')
+  .select('user decision updatedAt remarks')
   .exec((findErr, atts)=>{
     if (findErr){
       return res.status(400).json({error: 'Something wrong happened'});
