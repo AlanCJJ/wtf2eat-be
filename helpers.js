@@ -8,11 +8,9 @@ const User = require('./models/user');
 exports.setUserInfo = function setUserInfo(request) {
   const getUserInfo = {
     _id: request._id,
-    firstName: request.profile.firstName,
-    lastName: request.profile.lastName,
-    contactNo: request.profile.contactNo,
-    email: request.email,
-    role: request.role,
+    name: request.name,
+    contactNo: request.contactNo,
+    email: request.email
   };
 
   return getUserInfo;

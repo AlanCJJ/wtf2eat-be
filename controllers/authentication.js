@@ -32,8 +32,7 @@ exports.login = function (req, res) {
 exports.register = function (req, res, next) {
   // Check for registration errors
   const email = req.body.email;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
+  const name = req.body.name;
   const password = req.body.password;
   const contactNo = req.body.contactNo;
 
@@ -43,7 +42,7 @@ exports.register = function (req, res, next) {
   }
 
   // Return error if full name not provided
-  if (!firstName || !lastName) {
+  if (!name) {
     return res.status(422).send({ error: 'You must enter your full name.' });
   }
 
@@ -69,7 +68,8 @@ exports.register = function (req, res, next) {
     const user = new User({
       email,
       password,
-      profile: { firstName, lastName, contactNo }
+      name, 
+      contactNo
     });
 
     user.save((err, user) => {
