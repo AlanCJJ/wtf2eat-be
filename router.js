@@ -24,7 +24,7 @@ module.exports = function routes(app) {
   //= ========================
   apiRoutes.use('/auth', authRoutes);
   authRoutes.post('/register', AuthenticationController.register);
-  authRoutes.post('/login', requireLogin, AuthenticationController.login);
+  authRoutes.post('/login', UserController.mockLogin);
 
   //= ========================
   // User Routes

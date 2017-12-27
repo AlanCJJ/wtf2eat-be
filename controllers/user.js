@@ -5,8 +5,20 @@ const Attendance = require('../models/attendance');
 //= =======================================
 // User Routes
 //= =======================================
+exports.mockLogin = function list(req, res, next){
+  let email = req.body.email;
+  User.findOne({email}).exec((err, user)=>{
+    if (err) {
+       return res.status(400).json({ error: 'Server Error'});
+    } else {
+      if (!user){
+        return res.status(404).json({ error: 'User retrieval fail'});
+      }
+      return res.status(200).json(user);
+    }
+  })
+}
 exports.listUsers = function list(req, res, next) {
-  console.log("hello");
   User.find({ deletedAt: null })
   .exec((err, users) => {
     if (err) {
