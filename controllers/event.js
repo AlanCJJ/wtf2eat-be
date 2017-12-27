@@ -99,23 +99,22 @@ exports.createEvent = (req, res, next) => {
   console.log('here');
   const startDate = req.body.startDate;
   const endDate = req.body.endDate;
-  const placeName = req.body.placeName;
-  const longitude = req.body.longitude;
-  const latitude = req.body.latitude;
-  const activityName = req.body.activityName;
+  const longitude = req.body.longitude ? req.body.longtitude : null;
+  const latitude = req.body.latitude ? req.body.latitude : null;
+  const activityName = req.body.activityName
   const deadline = req.body.deadline;
   const startTime = req.body.startTime;
   const endTime = req.body.endTime;
-  const invitationOnly = req.body.invitationOnly;
-  const organiser = req.body.organiser;
-  const remarks = req.body.remarks;
+  const placeName = req.body.placeName ? req.body.placeName : null;
+  const invitationOnly = req.body.invitationOnly ? req.body.invitationOnly : null;
+  const organiser = req.body.organiser ? req.body.organiser : null;
+  const remarks = req.body.remarks ? req.body.remarks : null;
   const createdBy = req.body.createdBy;
 
   const event = new Event({
     startDate,
     endDate,
     longitude,
-    placeName,
     latitude,
     activityName,
     deadline,
